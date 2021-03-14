@@ -1,13 +1,12 @@
 #pragma once
 
-#include "../thirdparties/randen/randen.h"
-
 #include <random>
 
-namespace BFVpp
-{
-    static thread_local std::random_device trng;
-    static thread_local randen::Randen<uint64_t> generator(trng());
+#include "../thirdparties/randen/randen.h"
+
+namespace BFVpp {
+static thread_local std::random_device trng;
+static thread_local randen::Randen<uint64_t> generator(trng());
 
 // https://qiita.com/saka1_p/items/e8c4dfdbfa88449190c5
 template <typename T>
@@ -52,4 +51,4 @@ inline void MulInFD(std::array<double, N> &res, const std::array<double, N> &a,
         res[i + N / 2] = std::fma(a[i + N / 2], b[i], arebim);
     }
 }
-} // namespace BFVpp
+}  // namespace BFVpp
