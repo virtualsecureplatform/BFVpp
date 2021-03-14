@@ -72,7 +72,7 @@ random
 ../thirdparties/randen/randen.h
 /home/nimda/sources/BFVpp/thirdparties/randen/randen.h
 
-/home/nimda/sources/BFVpp/test/encrypt-decrypt.cpp
+/home/nimda/sources/BFVpp/test/evaluation.cpp
 iostream
 -
 ../include/bfv++.hpp

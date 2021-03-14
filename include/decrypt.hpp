@@ -1,6 +1,7 @@
 #pragma once
 
 #include "types.hpp"
+#include "mulfft.hpp"
 
 namespace BFVpp {
 template <class P>

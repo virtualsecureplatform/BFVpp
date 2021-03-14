@@ -8,4 +8,5 @@
 /home/nimda/sources/BFVpp/build/thirdparties/spqlios/CMakeFiles/spqlios.dir
 /home/nimda/sources/BFVpp/build/test/CMakeFiles/rebuild_cache.dir
 /home/nimda/sources/BFVpp/build/test/CMakeFiles/edit_cache.dir
+/home/nimda/sources/BFVpp/build/test/CMakeFiles/evaluation.dir
 /home/nimda/sources/BFVpp/build/test/CMakeFiles/encrypt-decrypt.dir

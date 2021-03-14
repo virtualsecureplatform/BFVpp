@@ -13,4 +13,6 @@ template <class P>
 using PolynomialInFD = std::array<double, P::n>;
 template <class P>
 using Ctxt = std::array<Polynomial<P>, 2>;
+template <class P>
+using CtxtMult = std::array<Polynomial<P>, 3>;
 }  // namespace BFVpp

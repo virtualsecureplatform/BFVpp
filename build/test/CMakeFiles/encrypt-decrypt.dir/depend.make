@@ -4,6 +4,7 @@
 test/CMakeFiles/encrypt-decrypt.dir/encrypt-decrypt.cpp.o: ../include/bfv++.hpp
 test/CMakeFiles/encrypt-decrypt.dir/encrypt-decrypt.cpp.o: ../include/decrypt.hpp
 test/CMakeFiles/encrypt-decrypt.dir/encrypt-decrypt.cpp.o: ../include/encrypt.hpp
+test/CMakeFiles/encrypt-decrypt.dir/encrypt-decrypt.cpp.o: ../include/evaluation.hpp
 test/CMakeFiles/encrypt-decrypt.dir/encrypt-decrypt.cpp.o: ../include/lwekey.hpp
 test/CMakeFiles/encrypt-decrypt.dir/encrypt-decrypt.cpp.o: ../include/mulfft.hpp
 test/CMakeFiles/encrypt-decrypt.dir/encrypt-decrypt.cpp.o: ../include/params.hpp

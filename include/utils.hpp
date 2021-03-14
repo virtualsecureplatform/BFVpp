@@ -51,4 +51,16 @@ inline void MulInFD(std::array<double, N> &res, const std::array<double, N> &a,
         res[i + N / 2] = std::fma(a[i + N / 2], b[i], arebim);
     }
 }
+
+// removing inline seems to be faster in my environment.
+template <uint32_t N>
+void FMAInFD(std::array<double, N> &res, const std::array<double, N> &a, const std::array<double, N> &b)
+{
+    for (int i = 0; i < N / 2; i++) {
+        res[i] = std::fma(a[i + N / 2], b[i + N / 2], -res[i]);
+        res[i] = std::fma(a[i], b[i], -res[i]);
+        res[i + N / 2] = std::fma(a[i], b[i + N / 2], res[i + N / 2]);
+        res[i + N / 2] = std::fma(a[i + N / 2], b[i], res[i + N / 2]);
+    }
+}
 }  // namespace BFVpp

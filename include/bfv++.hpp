@@ -4,3 +4,4 @@
 #include "./encrypt.hpp"
 #include "./lwekey.hpp"
 #include "./types.hpp"
+#include "./evaluation.hpp"

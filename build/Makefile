@@ -137,6 +137,19 @@ spqlios/fast:
 .PHONY : spqlios/fast
 
 #=============================================================================
+# Target rules for targets named evaluation
+
+# Build rule for target.
+evaluation: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 evaluation
+.PHONY : evaluation
+
+# fast build rule for target.
+evaluation/fast:
+	$(MAKE) -f test/CMakeFiles/evaluation.dir/build.make test/CMakeFiles/evaluation.dir/build
+.PHONY : evaluation/fast
+
+#=============================================================================
 # Target rules for targets named encrypt-decrypt
 
 # Build rule for target.
@@ -159,6 +172,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... randen"
 	@echo "... spqlios"
+	@echo "... evaluation"
 	@echo "... encrypt-decrypt"
 .PHONY : help
 

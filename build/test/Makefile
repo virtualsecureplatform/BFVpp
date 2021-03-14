@@ -111,6 +111,21 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+test/CMakeFiles/evaluation.dir/rule:
+	cd /home/nimda/sources/BFVpp/build && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/evaluation.dir/rule
+.PHONY : test/CMakeFiles/evaluation.dir/rule
+
+# Convenience name for target.
+evaluation: test/CMakeFiles/evaluation.dir/rule
+
+.PHONY : evaluation
+
+# fast build rule for target.
+evaluation/fast:
+	cd /home/nimda/sources/BFVpp/build && $(MAKE) -f test/CMakeFiles/evaluation.dir/build.make test/CMakeFiles/evaluation.dir/build
+.PHONY : evaluation/fast
+
+# Convenience name for target.
 test/CMakeFiles/encrypt-decrypt.dir/rule:
 	cd /home/nimda/sources/BFVpp/build && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/encrypt-decrypt.dir/rule
 .PHONY : test/CMakeFiles/encrypt-decrypt.dir/rule
@@ -152,6 +167,33 @@ encrypt-decrypt.cpp.s:
 	cd /home/nimda/sources/BFVpp/build && $(MAKE) -f test/CMakeFiles/encrypt-decrypt.dir/build.make test/CMakeFiles/encrypt-decrypt.dir/encrypt-decrypt.cpp.s
 .PHONY : encrypt-decrypt.cpp.s
 
+evaluation.o: evaluation.cpp.o
+
+.PHONY : evaluation.o
+
+# target to build an object file
+evaluation.cpp.o:
+	cd /home/nimda/sources/BFVpp/build && $(MAKE) -f test/CMakeFiles/evaluation.dir/build.make test/CMakeFiles/evaluation.dir/evaluation.cpp.o
+.PHONY : evaluation.cpp.o
+
+evaluation.i: evaluation.cpp.i
+
+.PHONY : evaluation.i
+
+# target to preprocess a source file
+evaluation.cpp.i:
+	cd /home/nimda/sources/BFVpp/build && $(MAKE) -f test/CMakeFiles/evaluation.dir/build.make test/CMakeFiles/evaluation.dir/evaluation.cpp.i
+.PHONY : evaluation.cpp.i
+
+evaluation.s: evaluation.cpp.s
+
+.PHONY : evaluation.s
+
+# target to generate assembly for a file
+evaluation.cpp.s:
+	cd /home/nimda/sources/BFVpp/build && $(MAKE) -f test/CMakeFiles/evaluation.dir/build.make test/CMakeFiles/evaluation.dir/evaluation.cpp.s
+.PHONY : evaluation.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -160,10 +202,14 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... evaluation"
 	@echo "... encrypt-decrypt"
 	@echo "... encrypt-decrypt.o"
 	@echo "... encrypt-decrypt.i"
 	@echo "... encrypt-decrypt.s"
+	@echo "... evaluation.o"
+	@echo "... evaluation.i"
+	@echo "... evaluation.s"
 .PHONY : help
 
 
