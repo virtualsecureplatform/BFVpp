@@ -1,1 +1,0 @@
-g++  -march=native -O3 -std=c++17 -g   CMakeFiles/encrypt-decrypt.dir/encrypt-decrypt.cpp.o  -o encrypt-decrypt  ../thirdparties/spqlios/libspqlios.a ../thirdparties/randen/libranden.a 

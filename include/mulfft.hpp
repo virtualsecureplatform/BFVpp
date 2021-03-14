@@ -2,9 +2,9 @@
 
 #include "../thirdparties/spqlios/spqlios-fft.h"
 #include "./types.hpp"
+#include "./utils.hpp"
 
 namespace BFVpp {
-thread_local FFT_Processor_Spqlios fftplvl1(Parameter::n);
 
 template <class P>
 inline void TwistFFT(Polynomial<P> &res, const PolynomialInFD<P> &a)
@@ -13,6 +13,17 @@ inline void TwistFFT(Polynomial<P> &res, const PolynomialInFD<P> &a)
         fftplvl1.execute_direct_torus32(res.data(), a.data());
     else if constexpr (std::is_same_v<typename P::T, uint64_t>)
         fftplvl2.execute_direct_torus64(res.data(), a.data());
+    else
+        static_assert(false_v<typename P::T>, "Undefined TwistFFT!");
+}
+
+template <class P>
+inline void TwistFFTrescale(Polynomial<P> &res, const PolynomialInFD<P> &a)
+{
+    if constexpr (std::is_same_v<typename P::T, uint32_t>)
+        fftplvl1.execute_direct_torus32_rescale(res.data(), a.data());
+    // else if constexpr (std::is_same_v<typename P::T, uint64_t>)
+    //     fftplvl2.execute_direct_torus64_rescale(res.data(), a.data());
     else
         static_assert(false_v<typename P::T>, "Undefined TwistFFT!");
 }
@@ -59,4 +70,21 @@ inline void PolyMul(Polynomial<P> &res, const Polynomial<P> &a,
     else
         static_assert(false_v<typename P::T>, "Undefined PolyMul!");
 }
+
+template <class P>
+inline void PolyMulRescale(Polynomial<P> &res, const Polynomial<P> &a,
+                    const Polynomial<P> &b)
+{
+    if constexpr (std::is_same_v<typename P::T, uint32_t>) {
+        PolynomialInFD<P> ffta;
+        TwistIFFT<P>(ffta, a);
+        PolynomialInFD<P> fftb;
+        TwistIFFT<P>(fftb, b);
+        MulInFD<P::n>(ffta, ffta, fftb);
+        TwistFFTrescale<P>(res, ffta);
+    }
+    else
+        static_assert(false_v<typename P::T>, "Undefined PolyMul!");
+}
+
 }  // namespace BFVpp
