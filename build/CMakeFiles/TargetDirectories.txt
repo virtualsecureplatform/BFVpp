@@ -1,0 +1,11 @@
+/home/nimda/sources/BFVpp/build/CMakeFiles/rebuild_cache.dir
+/home/nimda/sources/BFVpp/build/CMakeFiles/edit_cache.dir
+/home/nimda/sources/BFVpp/build/thirdparties/randen/CMakeFiles/rebuild_cache.dir
+/home/nimda/sources/BFVpp/build/thirdparties/randen/CMakeFiles/edit_cache.dir
+/home/nimda/sources/BFVpp/build/thirdparties/randen/CMakeFiles/randen.dir
+/home/nimda/sources/BFVpp/build/thirdparties/spqlios/CMakeFiles/rebuild_cache.dir
+/home/nimda/sources/BFVpp/build/thirdparties/spqlios/CMakeFiles/edit_cache.dir
+/home/nimda/sources/BFVpp/build/thirdparties/spqlios/CMakeFiles/spqlios.dir
+/home/nimda/sources/BFVpp/build/test/CMakeFiles/rebuild_cache.dir
+/home/nimda/sources/BFVpp/build/test/CMakeFiles/edit_cache.dir
+/home/nimda/sources/BFVpp/build/test/CMakeFiles/encrypt-decrypt.dir

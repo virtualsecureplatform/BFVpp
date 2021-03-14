@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/params.hpp
+cstdint
+-
+cmath
+-
+limits
+-
+
+/home/nimda/sources/BFVpp/thirdparties/spqlios/fft_processor_spqlios.cpp
+cassert
+-
+cmath
+-
+cstdint
+-
+params.hpp
+-
+spqlios-fft.h
+/home/nimda/sources/BFVpp/thirdparties/spqlios/spqlios-fft.h
+
+/home/nimda/sources/BFVpp/thirdparties/spqlios/spqlios-fft.h
+cassert
+-
+cmath
+-
+cstdint
+-
+
