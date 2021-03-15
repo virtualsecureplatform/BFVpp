@@ -34,7 +34,7 @@ public:
 
     FFT_Processor_Spqlios(const int32_t N);
 
-    void execute_reverse_int(double *res, const uint32_t *a);
+    void execute_reverse_int(double *res, const int32_t *a);
 
     void execute_reverse_torus32(double *res, const uint32_t *a);
 

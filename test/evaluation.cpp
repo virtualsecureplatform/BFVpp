@@ -12,7 +12,7 @@ inline Polynomial<P> decryptCtxtMult(const CtxtMult<P> &c, const lweKey<P> &key)
     for (int i = 0; i < P::n; i++) phase[i] -= mulres[i];
 
     PolyMulNaieve<P>(keysquare,key,key);
-    PolyMul<P>(mulres, c[1], keysquare);
+    PolyMul<P>(mulres, c[2], keysquare);
     for (int i = 0; i < P::n; i++) phase[i] += mulres[i];
 
     for (int i = 0; i < P::n; i++)
@@ -30,8 +30,7 @@ int main()
     for (int test = 0; test < num_test; test++) {
         std::random_device seed_gen;
         std::default_random_engine engine(seed_gen());
-        std::uniform_int_distribution<typename BFVpp::Parameter::T> message(
-            0, BFVpp::Parameter::plain_modulus - 1);
+        std::uniform_int_distribution<typename BFVpp::Parameter::T> message(0, BFVpp::Parameter::plain_modulus - 1);
 
         BFVpp::lweKey<BFVpp::Parameter> key =
             BFVpp::lweKeygen<BFVpp::Parameter>();
@@ -46,13 +45,13 @@ int main()
         BFVpp::Ctxt<BFVpp::Parameter> cres;
         BFVpp::Add<BFVpp::Parameter>(cres,c0,c1);
         pres = BFVpp::decrypt<BFVpp::Parameter>(cres, key);
-        for (int i = 0; i < BFVpp::Parameter::n; i++)
-        std::cout<<p0[i]<<":"<<p1[i]<<std::endl;
+        // for (int i = 0; i < BFVpp::Parameter::n; i++)
+        // std::cout<<p0[i]<<":"<<p1[i]<<std::endl;
         for (int i = 0; i < BFVpp::Parameter::n; i++) assert(pres[i] == (p0[i]+p1[i])%BFVpp::Parameter::plain_modulus);
     }
     std::cout << "Passed" << std::endl;
 
-    std::cout << "Mul withou Relinerarization Test" << std::endl;
+    std::cout << "Mul without Relinerarization Test" << std::endl;
     for (int test = 0; test < num_test; test++) {
         std::random_device seed_gen;
         std::default_random_engine engine(seed_gen());
@@ -76,8 +75,8 @@ int main()
         BFVpp::PolyMulNaieve<BFVpp::Parameter>(ptrue,p0,p1);
         for (int i = 0; i < BFVpp::Parameter::n; i++) ptrue[i] %= BFVpp::Parameter::plain_modulus;
 
-        for (int i = 0; i < BFVpp::Parameter::n; i++)
-            std::cout<<pres[i]<<":"<<ptrue[i]<<std::endl;
+        // for (int i = 0; i < BFVpp::Parameter::n; i++)
+        //     std::cout<<pres[i]<<":"<<ptrue[i]<<std::endl;
         for (int i = 0; i < BFVpp::Parameter::n; i++) assert(pres[i] == ptrue[i]);
     }
     std::cout << "Passed" << std::endl;

@@ -63,24 +63,4 @@ void FMAInFD(std::array<double, N> &res, const std::array<double, N> &a, const s
         res[i + N / 2] = std::fma(a[i + N / 2], b[i], res[i + N / 2]);
     }
 }
-
-template <class P>
-inline void PolyMulNaieve(Polynomial<P> &res, const Polynomial<P> &a,
-                    const Polynomial<P> &b)
-{
-    for (int i = 0; i < P::n; i++) {
-        typename P::T ri = 0;
-        for (int j = 0; j <= i; j++)
-            ri +=
-                static_cast<typename std::make_signed<typename P::T>::type>(
-                    a[j]) *
-                b[i - j];
-        for (int j = i + 1; j < P::n; j++)
-            ri -=
-                static_cast<typename std::make_signed<typename P::T>::type>(
-                    a[j]) *
-                b[P::n + i - j];
-        res[i] = ri;
-    }
-}
 }  // namespace BFVpp
