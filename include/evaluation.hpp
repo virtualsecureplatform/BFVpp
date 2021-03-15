@@ -18,10 +18,10 @@ void MultiplicationWithoutRelinerization(CtxtMult<P> &res, const Ctxt<P> &a, con
     TwistIFFT<P>(ffta, a[1]);
     TwistIFFT<P>(fftb, b[0]);
     FMAInFD<P::n>(fftc,ffta,fftb);
-    TwistFFTrescale(res[0],fftc);
+    TwistFFTrescale<P>(res[0],fftc);
 
-    PolyMulRescale(res[1],a[1],b[1]);
+    PolyMulRescale<P>(res[1],a[1],b[1]);
 
-    PolyMulRescale(res[2],a[0],b[0]);
+    PolyMulRescale<P>(res[2],a[0],b[0]);
 }
 }  // namespace BFVpp

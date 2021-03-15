@@ -5,10 +5,10 @@
 
 namespace BFVpp {
 template <class P>
-inline Polynomial<P> decrypt(const Ctxt<P> &c, const lweKey<P> &sk)
+inline Polynomial<P> decrypt(const Ctxt<P> &c, const lweKey<P> &key)
 {
     Polynomial<P> mulres, p;
-    PolyMul<P>(mulres, c[0], sk);
+    PolyMul<P>(mulres, c[0], key);
     Polynomial<P> phase = c[1];
     for (int i = 0; i < P::n; i++) phase[i] -= mulres[i];
 
