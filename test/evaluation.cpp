@@ -2,16 +2,16 @@
 
 #include "../include/bfv++.hpp"
 
-namespace BFVpp{
-template<class P>
+namespace BFVpp {
+template <class P>
 inline Polynomial<P> decryptCtxtMult(const CtxtMult<P> &c, const lweKey<P> &key)
 {
-    Polynomial<P> mulres, p,keysquare;
+    Polynomial<P> mulres, p, keysquare;
     PolyMul<P>(mulres, c[0], key);
     Polynomial<P> phase = c[1];
     for (int i = 0; i < P::n; i++) phase[i] -= mulres[i];
 
-    PolyMulNaieve<P>(keysquare,key,key);
+    PolyMulNaieve<P>(keysquare, key, key);
     PolyMul<P>(mulres, c[2], keysquare);
     for (int i = 0; i < P::n; i++) phase[i] += mulres[i];
 
@@ -20,7 +20,7 @@ inline Polynomial<P> decryptCtxtMult(const CtxtMult<P> &c, const lweKey<P> &key)
                P::plain_modulus;
     return p;
 }
-}
+}  // namespace BFVpp
 
 int main()
 {
@@ -30,11 +30,12 @@ int main()
 
     std::cout << "Add Test" << std::endl;
     for (int test = 0; test < num_test; test++) {
-        std::uniform_int_distribution<typename BFVpp::Parameter::T> message(0, BFVpp::Parameter::plain_modulus - 1);
+        std::uniform_int_distribution<typename BFVpp::Parameter::T> message(
+            0, BFVpp::Parameter::plain_modulus - 1);
 
         BFVpp::lweKey<BFVpp::Parameter> key =
             BFVpp::lweKeygen<BFVpp::Parameter>();
-        BFVpp::Polynomial<BFVpp::Parameter> p0, p1,pres;
+        BFVpp::Polynomial<BFVpp::Parameter> p0, p1, pres;
         for (typename BFVpp::Parameter::T &i : p0) i = message(engine);
         for (typename BFVpp::Parameter::T &i : p1) i = message(engine);
 
@@ -43,11 +44,13 @@ int main()
         BFVpp::Ctxt<BFVpp::Parameter> c1 =
             BFVpp::encrypt<BFVpp::Parameter>(p1, BFVpp::Parameter::α, key);
         BFVpp::Ctxt<BFVpp::Parameter> cres;
-        BFVpp::Add<BFVpp::Parameter>(cres,c0,c1);
+        BFVpp::Add<BFVpp::Parameter>(cres, c0, c1);
         pres = BFVpp::decrypt<BFVpp::Parameter>(cres, key);
         // for (int i = 0; i < BFVpp::Parameter::n; i++)
         // std::cout<<p0[i]<<":"<<p1[i]<<std::endl;
-        for (int i = 0; i < BFVpp::Parameter::n; i++) assert(pres[i] == (p0[i]+p1[i])%BFVpp::Parameter::plain_modulus);
+        for (int i = 0; i < BFVpp::Parameter::n; i++)
+            assert(pres[i] ==
+                   (p0[i] + p1[i]) % BFVpp::Parameter::plain_modulus);
     }
     std::cout << "Passed" << std::endl;
 
@@ -58,7 +61,7 @@ int main()
 
         BFVpp::lweKey<BFVpp::Parameter> key =
             BFVpp::lweKeygen<BFVpp::Parameter>();
-        BFVpp::Polynomial<BFVpp::Parameter> p0, p1,pres,ptrue;
+        BFVpp::Polynomial<BFVpp::Parameter> p0, p1, pres, ptrue;
         for (typename BFVpp::Parameter::T &i : p0) i = message(engine);
         for (typename BFVpp::Parameter::T &i : p1) i = message(engine);
 
@@ -67,28 +70,31 @@ int main()
         BFVpp::Ctxt<BFVpp::Parameter> c1 =
             BFVpp::encrypt<BFVpp::Parameter>(p1, BFVpp::Parameter::α, key);
         BFVpp::CtxtMult<BFVpp::Parameter> cres;
-        BFVpp::MultiplicationWithoutRelinerization<BFVpp::Parameter>(cres,c0,c1);
+        BFVpp::MultiplicationWithoutRelinerization<BFVpp::Parameter>(cres, c0,
+                                                                     c1);
         pres = BFVpp::decryptCtxtMult<BFVpp::Parameter>(cres, key);
 
-        BFVpp::PolyMulNaieve<BFVpp::Parameter>(ptrue,p0,p1);
-        for (int i = 0; i < BFVpp::Parameter::n; i++) ptrue[i] %= BFVpp::Parameter::plain_modulus;
+        BFVpp::PolyMulNaieve<BFVpp::Parameter>(ptrue, p0, p1);
+        for (int i = 0; i < BFVpp::Parameter::n; i++)
+            ptrue[i] %= BFVpp::Parameter::plain_modulus;
 
         // for (int i = 0; i < BFVpp::Parameter::n; i++)
         //     std::cout<<pres[i]<<":"<<ptrue[i]<<std::endl;
-        for (int i = 0; i < BFVpp::Parameter::n; i++) assert(pres[i] == ptrue[i]);
+        for (int i = 0; i < BFVpp::Parameter::n; i++)
+            assert(pres[i] == ptrue[i]);
     }
     std::cout << "Passed" << std::endl;
 
-    BFVpp::lweKey<BFVpp::Parameter> key =
-            BFVpp::lweKeygen<BFVpp::Parameter>();
-    BFVpp::relinKeyFFT<BFVpp::Parameter> relinkeyfft = BFVpp::relinKeyFFTgen<BFVpp::Parameter>(key);
+    BFVpp::lweKey<BFVpp::Parameter> key = BFVpp::lweKeygen<BFVpp::Parameter>();
+    BFVpp::relinKeyFFT<BFVpp::Parameter> relinkeyfft =
+        BFVpp::relinKeyFFTgen<BFVpp::Parameter>(key);
 
     std::cout << "Mul Test" << std::endl;
     for (int test = 0; test < num_test; test++) {
         std::uniform_int_distribution<typename BFVpp::Parameter::T> message(
             0, BFVpp::Parameter::plain_modulus - 1);
 
-        BFVpp::Polynomial<BFVpp::Parameter> p0, p1,pres,ptrue;
+        BFVpp::Polynomial<BFVpp::Parameter> p0, p1, pres, ptrue;
         for (typename BFVpp::Parameter::T &i : p0) i = message(engine);
         for (typename BFVpp::Parameter::T &i : p1) i = message(engine);
 
@@ -97,15 +103,17 @@ int main()
         BFVpp::Ctxt<BFVpp::Parameter> c1 =
             BFVpp::encrypt<BFVpp::Parameter>(p1, BFVpp::Parameter::α, key);
         BFVpp::Ctxt<BFVpp::Parameter> cres;
-        BFVpp::Multiplication<BFVpp::Parameter>(cres,c0,c1,relinkeyfft);
+        BFVpp::Multiplication<BFVpp::Parameter>(cres, c0, c1, relinkeyfft);
         pres = BFVpp::decrypt<BFVpp::Parameter>(cres, key);
 
-        BFVpp::PolyMulNaieve<BFVpp::Parameter>(ptrue,p0,p1);
-        for (int i = 0; i < BFVpp::Parameter::n; i++) ptrue[i] %= BFVpp::Parameter::plain_modulus;
+        BFVpp::PolyMulNaieve<BFVpp::Parameter>(ptrue, p0, p1);
+        for (int i = 0; i < BFVpp::Parameter::n; i++)
+            ptrue[i] %= BFVpp::Parameter::plain_modulus;
 
         // for (int i = 0; i < BFVpp::Parameter::n; i++)
         //     std::cout<<pres[i]<<":"<<ptrue[i]<<std::endl;
-        for (int i = 0; i < BFVpp::Parameter::n; i++) assert(pres[i] == ptrue[i]);
+        for (int i = 0; i < BFVpp::Parameter::n; i++)
+            assert(pres[i] == ptrue[i]);
     }
     std::cout << "Passed" << std::endl;
 }

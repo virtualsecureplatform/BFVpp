@@ -31,7 +31,7 @@ template <class P>
 using CtxtMult = std::array<Polynomial<P>, 3>;
 
 template <class P>
-using relinKey = std::array<Ctxt<P>,P::l>;
+using relinKey = std::array<Ctxt<P>, P::l>;
 template <class P>
-using relinKeyFFT = std::array<CtxtInFD<P>,P::l>;
+using relinKeyFFT = std::array<CtxtInFD<P>, P::l>;
 }  // namespace BFVpp
