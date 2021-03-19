@@ -10,10 +10,11 @@ struct Parameter {
     static constexpr uint32_t n = 1U << nbit;
     static constexpr uint32_t plain_modulus = 2;
     static const inline double α = std::pow(2.0, -25);  // fresh noise
-    // static const inline double α = 0;  // fresh noise
+    static constexpr uint32_t Bgbit = 6;
+    static constexpr std::uint32_t Bg = 1U<<Bgbit;
+    static constexpr uint32_t l = 3;
     using T = uint32_t;
     static constexpr double Δ =
-        // static_cast<double>(std::numeric_limits<T>::max()) / plain_modulus;
         static_cast<double>(1ULL<<std::numeric_limits<T>::digits) / plain_modulus;
 };
 }  // namespace BFVpp
